@@ -1,0 +1,178 @@
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.waitforimages.js"></script>
+<script type="text/javascript">
+<!--
+$.fn.preload = function() {
+    this.each(function(){
+        //$('<img/>')[0].src =  $(this).attr('href');
+        //$('<img />').attr('src', $(this).attr('href')).appendTo('#content').css('display','none');
+    });
+}
+
+$('.xthumbs').waitForImages(function(){
+	$('#imgs_loading').fadeOut(2000);
+	$('.second-action').css('display', 'none');
+	//$('.pload').preload();	
+});
+
+jQuery(document).ready(function($){
+	$('a[rel*=facebox]').facybox();
+	$(".tip").tipTip({
+			maxWidth: "auto",
+			edgeOffset: 10,
+			//content: function() { return $(this).children('.ktip').html() },
+			delay:100
+			});
+
+	//Navigate to pages by arrows
+	$(document).keydown(function(e) {
+		if (!$('#pagination').length) {
+			return;
+		}
+		var current_page = parseInt($('#pagination .current span').html());
+		var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+		var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+		switch(e.keyCode) { 
+			//left, next
+			case 37:
+				if(!is_there_next){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page+1), '#content');
+			break;
+			//right, prev
+			case 39:
+				if(current_page <= 1){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page-1), '#content');
+			break;
+		}
+	});
+	
+	//when checked one checkbox?
+	$(".kcheck input[type=checkbox]").change( function(){
+		if($('.kcheck input[type=checkbox]:checked').length == 1){
+			$('#search-one-item').css('display', 'inline');
+		} else{
+			$('#search-one-item select').prop('selectedIndex', 0);
+			$('#search-one-item').css('display', 'none');
+		}
+	});
+
+	$(".kcheck input[type=checkbox]").click( function(){
+		$(this).attr('checked', !$(this).attr('checked'));
+		$(this).trigger('change');
+	});
+	
+	$(".kcheck").click( function(){
+		$(this).find('input').attr('checked', !$(this).find('input').attr('checked'));
+		$(this).find('input').trigger('change');
+	});
+	
+	$('#search-one-item select').change(function(){
+		tt = this.options[this.selectedIndex].value;
+		dd = $('.kcheck input[type=checkbox]:checked').val();
+		if(tt == 1){
+			s_value = $('#ip_'+dd).html();
+		}else if(tt == 2){
+			s_value = $('#user_'+dd).html();
+		}
+
+		window.open("{action_search}&s_input="+tt+"&s_value=" + encodeURI(s_value), '_newtab');
+		
+	});
+});
+//-->
+</script>
+
+
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+<h1>{lang.R_IMG_CTRL}  [{current_page}/{total_pages}]</h1>
+	<div class="second-action">
+		<div id="imgs_loading"><img src="{STYLE_PATH_ADMIN}images/ajax-loader.gif" /></div>
+	</div>
+</div>
+
+<div class="br"></div>
+<IF NAME="config.thumbs_imgs"><ELSE>
+<div class="note-info">
+{lang.THUMB_DIS_LONGTIME}
+</div>
+<div class="br"></div>
+</IF>
+
+<form method="post" name="imgform" action="{action}" id="imgs_form">
+
+<IF NAME="no_results">
+	<div class="note-info">
+		<h2>{lang.NO_RESULT_USE_SYNC}</h2>
+	</div>
+<ELSE>
+
+
+<!-- start data div -->
+<div id="boxs">
+<div class="xthumbs">
+	<LOOP NAME="arr">
+	{{tdnum}}
+	<li id="su[{{id}}]" class="tip" title="<span>{lang.FILENAME} : </span>{{name}}<br />
+			<span>{lang.FILEUPS} : </span> {{ups}}<br />
+			<span>{lang.FILESIZE} : </span> {{size}}<br />
+			<span>{lang.FILEDATE} : </span> {{time}}<br />
+			<span>{lang.BY} : </span> {{user}}<br />
+			<span>{lang.IP} : </span> {{ip}}">
+		<a href="{{href}}" rel="" target="_blank" class="pload">
+			<div class="Kload"><img src="{{thumb_link}}" alt=""  /></div>
+		</a>
+		<div class="ktip" style="display: none;">
+			 <span id="user_{{id}}">{{user}}</span>
+			  <span id="ip_{{id}}">{{ip}}</span>
+		</div>
+		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
+	</li>
+	{{tdnum2}}
+	</LOOP>
+</div>
+</div>
+<!-- end data div -->
+
+<div class="br"></div>
+
+<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
+	
+<!-- pagination -->
+{page_nums}
+
+<div class="clear"></div>
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+<span id="search-one-item" style="display:none">
+	<select>
+		<option value="0">{lang.SEARCH_SUBMIT} : </option>
+		<option value="1">{lang.SEARCH4FILES_BYIP}</option>
+		<option value="2">{lang.SEARCH4FILES_BYUSER}</option>
+	</select> | 
+	</span>
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+</p>
+<div class="br"></div>
+<div class="br"></div>
+</IF>
+	
+{H_FORM_KEYS}
+</form>
+
+</div>
+<!-- the big box end -->
+
+<!--div class="note-info">
+	<h3>Keyboards Keys /</h3>
+	->	: {lang.NEXT} <br />
+	<-	: {lang.PREV} <br />
+</div-->
+

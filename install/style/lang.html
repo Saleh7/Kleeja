@@ -1,0 +1,8 @@
+<div class="language_choose">
+	<ul id="LangChoose">
+		{{if($dh = @opendir($_path . 'lang')): while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
+		<li><a href="{{echo $_SERVER['PHP_SELF'] . '?step=language&amp;ln=' . $file}}"><img src="style/images/{{echo $file}}.png" alt="{{echo $file}}" /></a></li>
+		{{endif;endwhile;@closedir($dh);endif;}}
+	</ul>
+</div>
+

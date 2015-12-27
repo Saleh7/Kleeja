@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{lang.LANG_SMALL_NAME}" xml:lang="{lang.LANG_SMALL_NAME}">
+<head>
+<title>{lang.KLEEJA_CP} - {config.sitename}</title>
+<!-- top-head -->
+<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
+<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/global.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/byname.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/facybox.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/tiptip.css" />
+<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>
+<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie6.css" /></IS_BROWSER>
+<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
+
+<script type="text/javascript">
+<!--//
+var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+var go_to = '{go_to}';
+//-->
+</script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
+<!--script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.ui.min.js"></script-->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/facybox.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.tiptip.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jqBarGraph.js"></script>
+<script type="text/javascript">
+<!--//
+jQuery(document).ready(function($){
+$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
+
+//$('#menu li.link_menu:gt(7)').hide();
+
+
+if(location.href.match(/cp\=([0-9a-z_]+)/)){
+	cp_var = location.href.match(/cp\=([0-9a-z_]+)/)[1];
+}else{
+	cp_var = 'start';
+}
+
+$('li[goto='+ cp_var +']').css('display', 'block');
+$('.show_button').click(function() {
+	$('#menu li.link_menu:gt(7)').toggle();
+	$('.show_button span').toggle();
+	$('li[goto='+ cp_var +']').css('display', 'block');
+});
+
+
+<IF NAME="AJAX_ACP">
+if(window.location.hash.indexOf("#!") != -1 && '{is_ajax}' != 'newplg'){
+	hash = window.location.hash.replace('#!', '');
+	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
+	if(!where_are_we){
+		where_are_we = 'index';
+		hash = 'cp=start';
+	}else{
+		where_are_we = where_are_we[1];
+	}
+
+	console.debug('where_are_we='+where_are_we);
+	//for go menu
+	if(where_are_we != 'php_info'){
+		div_id = $('li[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("li[goto='"+ where_are_we +"']").attr('gomenu_id');
+		if(gomenu_id){
+			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
+		}
+	}else if(where_are_we == 'php_info'){
+		div_id = 'menu_item1'; gomenu_id = '1';
+	}
+
+	console.debug('div_id='+div_id);
+	console.debug('gomenu_id='+gomenu_id);
+	if(hash != '')
+	{
+		//alert(hash)
+		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+	}
+}
+else{
+if ('{current_smt}' != 'newplg'){
+	window.location.hash = '#!'
+}
+}
+
+window.onhashchange = function () {
+	//for # in address bar
+	hash = window.location.hash.replace('#!', '');
+	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
+	if(window.location.hash.indexOf("plugins") != -1){
+		return;
+	}
+	if(window.location.hash.indexOf("style_orders") != -1){
+		return;
+	}
+
+	if(!where_are_we){
+		where_are_we = 'index';
+		hash = 'cp=start';
+	}else{
+		where_are_we = where_are_we[1];
+	}
+
+	console.debug('where_are_we='+where_are_we);
+	//for go menu
+	if(where_are_we != 'php_info'){
+		div_id = $('li[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("li[goto='"+ where_are_we +"']").attr('gomenu_id');
+		if(gomenu_id){
+			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
+		}
+	}else if(where_are_we == 'php_info'){
+		div_id = 'menu_item1'; gomenu_id = '1';
+	}
+
+	console.debug('div_id='+div_id);
+	console.debug('gomenu_id='+gomenu_id);
+	if(hash != '')
+	{
+		//alert(hash)
+	get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+	}
+
+	//if ("onhashchange" in window){ // does the browser support the hashchange event?
+
+		//	get_kleeja_link('./?' + , '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+    }
+   </IF>
+});
+
+
+//check for msg, reports every 5min
+// set timeout
+var tid = setTimeout(check_msg_and_reports, 240000);
+function check_msg_and_reports(){
+$.ajax({
+	url: './?check_msgs=1',
+	success: function(data) {
+		if(data.indexOf("::") != -1){
+			var nums = data.split("::");
+			if(nums[0] != 0){
+				$('#t_calls').html(nums[0]).css('display', 'inline');
+			}
+			if(nums[1] != 0){
+				$('#t_reports').html(nums[1]).css('display', 'inline');
+			}
+		}
+  }
+});
+
+  tid = setTimeout(check_msg_and_reports, 240000);
+}
+
+
+function get_kleeja_link(URL, ID, p)
+{
+	<IF NAME="AJAX_ACP">
+	if(!p){
+		p = {};
+	}
+
+	if(!ID){
+		ID = '#content';
+	}
+
+	$("#sign_ajax_error").css('display', 'none');
+
+	if(p['confirm']){
+		if(!confirm_from()){
+			return;
+		}
+	}
+
+	//$(ID).css('display', 'none');
+	$(ID).addClass('show_less');
+
+	if(URL.indexOf('?') == -1){
+		URL += '?';
+	}
+
+	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1];
+	if(window.location.hash.indexOf('formkey') != -1){
+		//window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
+	}
+
+	$("#sign_ajax").show();
+
+	$.ajax({
+		url: URL.replace('&amp;', '&') + '&_ajax_=1',
+		cache: false,
+		dataType: 'json',
+		success: function(R){
+
+			$("#sign_ajax").css('display', 'none');
+
+			//not login
+			if(R.code == 999){
+				location.href = './';
+				return;
+			} else if(R.code == 888) {
+				alert(R.content);
+				get_kleeja_link(URL, ID);
+				return;
+			} else {
+				$(ID).html(R.content);
+
+				if(p['current_id']){
+					$('.' + p['current_class']).removeClass(p['current_class']);
+					$('#' + p['current_id']).addClass(p['current_class']);
+				}
+
+				$(ID).removeClass('show_less');
+				$(ID).fadeIn(50);
+
+				if(URL.indexOf('img_ctrl') == -1){
+					if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
+						$('body').animate({scrollTop:0}, 'slow');
+					} else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
+						$('html').animate({scrollTop:0}, 'slow');
+					}
+				}
+
+				if(p['gomenu_id']) {
+					$('.go_menu').html('').fadeOut("slow")
+					if(R.menu) {
+						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
+					}
+				} else {
+					if(R.menu) {
+						$("div[class='link_current']").html(R.menu).fadeIn("slow");
+					}
+				}
+			}
+		},
+		error : function(R, status, errormsg){
+			if(R.responseText != '' || errormsg != ''){
+				$("#sign_ajax_error .error_msg_content").html((R.responseText == '' ? status+':'+errormsg : R.responseText));
+			}
+
+			//if(R == 999)
+			//{
+				//alert(errormsg);
+				//return;
+			//}
+			$("#sign_ajax").css('display', 'none');
+			$("#sign_ajax_error").show();
+			$("#sign_ajax_error .error_msg_content").show();
+		}
+	});
+
+	<ELSE>
+	location.href=URL;
+	return;
+	</IF>
+}
+
+function submit_kleeja_data(FORM_ID, ID, CONFIRM)
+{
+	<IF NAME="AJAX_ACP">
+	if(!ID){
+		ID = '#content';
+	}
+
+	if(CONFIRM){
+		if(!confirm_from()){
+			return;
+		}
+	}
+
+	URL = $(FORM_ID).attr('action');
+	if(URL.indexOf('?') == -1){
+		URL += '?';
+	}
+	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1];
+	if(window.location.hash.indexOf('formkey') != -1){
+		window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
+	}
+
+	$("#sign_ajax_error").css('display', 'none');
+	//$(ID).css('display', 'none');
+	$(ID).addClass('show_less');
+	$("#sign_ajax").show();
+
+	$.ajax({
+		type: 'POST',
+		url: URL.replace('&amp;', '&') + '&_ajax_=1',
+		data: $(FORM_ID).serialize(),
+		cache: false,
+		dataType: 'json',
+		success: function(R){
+
+			$("#sign_ajax").css('display', 'none');
+
+			//not login
+			if(R.code == 999){
+				location.href = './';
+			}else if(R.code == 888){
+				if(R.content != ''){
+					alert(R.content);
+				}
+				get_kleeja_link($(FORM_ID).attr('action'), ID);
+				return;
+			}else{
+				$(ID).html(R.content);
+				$(ID).removeClass('show_less');
+				$(ID).fadeIn(100);
+				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
+					$('body').animate({scrollTop:0}, 'slow');
+				}else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
+					$('html').animate({scrollTop:0}, 'slow');
+				}
+
+				if(gomenu_id){
+					$('.go_menu').html('').fadeOut("slow")
+					if(R.menu){
+						$('#gomenu'+gomenu_id).html(R.menu).fadeIn("slow");
+					}
+				}else{
+					if(R.menu){
+						$("div[class='link_current']").html(R.menu).fadeIn("slow");
+					}
+				}
+			}
+		},
+		error : function(R){
+			if(R.responseText != '' || errormsg != ''){
+				$("#sign_ajax_error .error_msg_content").html((R.responseText == '' ? status+':'+errormsg : R.responseText));
+			}
+
+			$("#sign_ajax").css('display', 'none');
+			$("#sign_ajax_error").show();
+			$("#sign_ajax_error .error_msg_content").show();
+		}
+	});
+	<ELSE>
+	$(FORM_ID).submit();
+	return;
+	</IF>
+}
+
+function change_color(obj, id, c, c2) {
+    c = (c == null) ? 'ored' : c;
+    c2 = (c == null) ? 'osilver' : c2;
+    var ii = document.getElementById(id);
+    if (obj.checked) {
+        ii.setAttribute("class", c);
+        ii.setAttribute("className", c)
+    } else {
+        ii.setAttribute("class", c2);
+        ii.setAttribute("className", c2)
+    }
+}
+function checkAll(form, id, _do_c_, c, c2) {
+    for (var i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].getAttribute("rel") != id) continue;
+        if (form.elements[i].checked) {
+			uncheckAll(form, id, _do_c_, c, c2);
+			break
+        }
+        form.elements[i].checked = true;
+        change_color(form.elements[i], _do_c_ + '[' + form.elements[i].value + ']', c, c2)
+    }
+}
+function uncheckAll(form, id, _do_c_, c, c2) {
+    for (var i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].getAttribute("rel") != id) continue;
+        form.elements[i].checked = false;
+        change_color(form.elements[i], _do_c_ + '[' + form.elements[i].value + ']', c, c2)
+    }
+}
+function change_color_exts(id) {
+    eval('var ii = document.getElementById("su[' + id + ']");');
+    eval('var g_obj = document.getElementById("gal_' + id + '");');
+    eval('var u_obj = document.getElementById("ual_' + id + '");');
+    if (g_obj.checked && u_obj.checked) {
+        ii.setAttribute("class", 'o_all');
+        ii.setAttribute("className", 'o_all')
+    } else if (g_obj.checked) {
+        ii.setAttribute("class", 'o_g');
+        ii.setAttribute("className", 'o_g')
+    } else if (u_obj.checked) {
+        ii.setAttribute("class", 'o_u');
+        ii.setAttribute("className", 'o_u')
+    } else {
+        ii.setAttribute("class", '');
+        ii.setAttribute("className", '')
+    }
+}
+function checkAll_exts(form, id, _do_c_) {
+    for (var i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].getAttribute("rel") != id) continue;
+        if (form.elements[i].checked) {
+			uncheckAll_exts(form, id, _do_c_);
+			break
+        }
+        form.elements[i].checked = true;
+        change_color_exts(form.elements[i].value)
+    }
+}
+function uncheckAll_exts(form, id, _do_c_) {
+    for (var i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].getAttribute("rel") != id) continue;
+        form.elements[i].checked = false;
+        change_color_exts(form.elements[i].value)
+    }
+}
+//-->
+</script>
+</head>
+<body>
+
+<!-- ajax loading sign -->
+<div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
+<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');">
+		<img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}
+		<div class="error_msg_content"></div>
+</div>
+
+<div id="wrap">
+	<!-- top header -->
+	<div id="top-header" style="text-transform:capitalize;">
+			<div class="pop">
+			<ul>
+				<li><a href="http://www.kleeja.com/support/" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
+				<li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
+				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP} [ {username} ]</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--  menu -->
+	<div id="menu">
+		<ul>
+			<li class="link_menu" id="menu_item1" gomenu_id="1" goto="start">
+				<a title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current',gomenu_id:1}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /><span>{lang.R_CPINDEX}</span><span style="font-size:9px;vertical-align: top;color:#666;">{assigned_klj_ver}</span></a>
+				<div id="menu_left"><ul class="go_menu" id="gomenu1"><IF NAME="go_to==start">{go_menu_html}</IF></ul></div>
+			</li>
+			<LOOP NAME="adm_extensions_menu">
+			<li class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
+				<a title="{{title}}" href="{{link}}#!cp={{goto}}" onclick="javascript:get_kleeja_link(this.href.replace('#!cp={{goto}}', ''), '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
+				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"><IF LOOP="current">{go_menu_html}</IF></ul></div>
+			</li>
+			</LOOP>
+		</ul>
+		<!--div class="show_more_box"><a href="#" class="show_button"><span style="display:">{lang.MORE}</span><span style="display:none">{lang.LESS}</span></a></div-->
+	</div>
+
+	<div id="content">

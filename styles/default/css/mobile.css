@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	Filename: 		styles/default/mobile.css
+	package:		Kleeja  copyright(c)2007-2012
+	version:		1.5
+	URL:			http://www.kleeja.com
+	Date:			2012-10-18
+	Author: 		Kleeja team
+	-------------------------------------------------- */
+	
+
+/*  @mobile styles -------------------- */
+	html, body {
+		font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
+		height:100% !important;width:auto !important;
+		background:#ECECEC;
+		padding:0;
+		color: #000;
+		margin: 0;
+		font-size:14px
+		webkit-text-size-adjust: none;
+	}
+	h1, h2, h3, h4, h5, h6 {font-weight: bold;font-size:12px;}
+	a:link, a:visited {text-decoration: underline;color: #8EC1DA;text-decoration: none;}
+	a:hover, a:active {text-decoration: none;color: #8EC1DA;}
+	.wolcome_msg{display:none;}
+	p, ul, ol {line-height:100%;}
+	#header {text-align:center; margin: 0px auto;}
+	#main {width:100%;margin:0px auto;background-image: none;}
+	h1.title {font-size:12px; width:100% !important;}
+	#footer,.extras_header, .extras_footer {display:none;}
+	#header .logo {height:auto; padding:2px; width:auto; text-indent:0px; background-image:none; font-size:20px;}
+	#content, #content_index  {padding:0;margin:4px auto;float:none;width:auto;}
+
+/* last update */
+#wrapper {padding:0px;}
+
+.logo a{color: #8EC1DA !important;}
+.top_nav {background:#8EC1DA none repeat-x top center; width:auto;}
+.top_nav .menu {margin:0px auto; padding:0; text-align:center;
+}
+.top_nav .menu li{padding:0;
+display:block;margin:0 0.5em;
+}
+.top_nav .menu li:nth-child(1){display:none}
+.top_nav .menu li:nth-child(2){display:none}
+.top_nav .menu li a {color: #000; font-size:10px; padding:0; margin:0;font-weight:normal}
+.top_nav .menu li a:hover {color:#4B4F52;background-color:#DFEDF8;padding:0;}
+.top_nav .menu li a.current {color:#4B4F52;background-color:#DFEDF8; padding:0;}
+.agree {margin: 5px auto;text-align:center;display:none}
+.bn_up{margin: 20px auto;text-align:center;}
+.tabcon input{width:auto;}
+.login {text-align:center;}
+.box_form_login {width: 100%;}
+.title_login {text-indent: 0px;}
+.forget_pass {float: none;}
+#sidebar {background-color:#4B4F52;float: none;margin: 0;padding: 0;width:auto;height:auto;border-radius:0;}
+#sidebar_box {margin:0;padding:0; text-align:center;}
+#sidebar_box  .menu{margin:0px auto;}
+#sidebar_box .menu li {margin:0; padding:0; display:inline-block;}
+#sidebar_box .menu li a{color:#fff;display: inline-block;font-size: 10px;;height: 40px;line-height: 35px;padding: 0 10px;}
+#content_index, #content {min-height:auto;padding:1px; font-size:11px;}
+
+#profile .boxdata{
+	width: auto;
+	float:none;
+	height:auto;
+	clear:both;
+	margin-bottom:10px;
+}
+
+#profile div:nth-child(4){
+	display:none
+}
+

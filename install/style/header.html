@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{echo getlang()}}" lang="{{echo getlang()}}" dir="{{echo $lang['DIR']}}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, follow" />
+<title>{{echo $lang['INST_INSTALL_WIZARD']}}</title>
+<link rel="shortcut icon" href="../images/favicon.ico" />
+<link rel="icon" type="image/gif" href="../images/favicon.gif" />
+<script type="text/javascript" src="{{echo getjquerylink()}}"></script>
+<script type="text/javascript" src="style/javascript.js"></script>
+<!--script src="../admin/buraidah/js/jquery.min.js" type="text/javascript"></script-->
+<style type="text/css">{{echo gettpl('style.css')}}</style>
+<!--[if IE]><style type="text/css">.divline,button.btn span{margin-top:0;}.wrapper {background-position: center -5px;}</style><![endif]-->
+<script type="text/javascript">
+<!--
+var PATH_SPACER = 'style/images/spacer.gif';
+$(document).ready(function(arg) {
+	$("#lang").msDropDown();
+	$("#toggleElement").click(function() {		
+		$("#next").toggle(!$(this).attr('checked'));		
+	});
+});
+//-->
+</script>
+</head>
+<body>
+	<div id="Header">
+		<div class="header">
+			<ul class="headerIcon">
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="style/images/kleeja.png" title="Go to site kleeja" alt="" /></a></li>
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/forums/"><img title="Ask for help in the forums" src="style/images/help.png" alt="" /></a></li>
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/"><img title="Reporting bugs" src="style/images/bug.png" alt="" /></a></li>
+				<li><a href="./."><img title="Return to Installation" src="style/images/install_h.png" alt="" /></a></li>
+			</ul>
+			<div class="BoxLang">
+			{{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license' || $_GET['step'] == 'action_file') ):}}
+				<form action="?step={{echo htmlspecialchars($_GET['step'])}}&amp;change_lang=1" method="post">
+					<select name="lang" id="lang" class="Lang" onchange="submit()">
+					{{if($dh = opendir($_path . 'lang')):}}
+						{{while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
+						<option value="{{echo $file}}" title="style/images/{{echo $file}}_16.png" {{echo isset($_GET['lang']) && $file==$_GET['lang'] || (empty($_GET['lang']) && $file=='en') ?'selected="selected"':''}}>{{echo $file}}</option>
+					{{endif; endwhile;closedir($dh);endif;}}
+					</select>
+					<input type="hidden" name="step_is" value="{{echo htmlspecialchars($_GET['step'])}}" />
+				</form>
+			{{endif;}}
+			</div>
+		</div>
+		<div class="divline"></div>
+	</div>
+	<div class="clr"></div>
+	<div class="wrapper">
+	<div class="clr"></div><br />

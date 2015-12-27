@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* @CSS Hacks for IE6 and Lower */
+* html selector{property:value;}
+input, textarea, select, option {font:normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }
+#content_index {height:220px;}
+.top_nav .menu li a:hover {color:#fff;background: url(../images/current-bg.gif) repeat-x top left;}
+.guide_user_th , .guide_visitor_th,.user_ext , .visitor_ext{background-image:none;}
+.title {margin:10px 0;}
+.left_button input{cursor: hand;}
+.up_input {direction:ltr;width:97%;color:#111;padding:3px;letter-spacing:1px;vertical-align:middle;}
+.agree{position:relative}
+input:focus, textarea:focus, input.sffocus { border: 1px solid #D26900;padding:4px 0px;}
+.data_file .filereport {height:22px;line-height:22px;}
+.line {background:#fff;height:2px;border-bottom: 1px solid #ECECEC;}

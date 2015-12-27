@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	Filename: 		styles/default/css3.css
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- */
+
+/*  #Snow Leopard Safari Type Fix ----------- */	
+	body {-webkit-text-stroke: 1px rgba(255,255,255,.01); }
+
+/*	---------------------------------------
+	#Box Shadow
+	--------------------------------------- */	
+	/* @Orange Light Shadow --------------- */
+	input, textarea, select{-moz-box-shadow: 0px 0px 8px #62B4E8;-webkit-box-shadow: 0px 0px 8px #62B4E8;-khtml-box-shadow: 0px 0px 8px #62B4E8;box-shadow: 0px 0px 8px #62B4E8;}
+	
+	/* @Orange Light Shadow --------------- */
+	input[type="file"]{-moz-box-shadow: none;-webkit-box-shadow: none;-khtml-box-shadow: none;box-shadow:none;}
+	
+	/* @Orange Shadow --------------- */
+	input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus,
+	textarea:focus, textarea:hover,	select:hover, select:focus{
+	-moz-box-shadow:0 0 4px #62B4E8;-webkit-box-shadow:0 0 4px #62B4E8;-khtml-box-shadow:0 0 4px #62B4E8;box-shadow:0 0 4px #62B4E8;}
+	
+	/* @White Shadow (4) pixel ------------- */
+	.border_radius,	#footer a.admin_cp_link,	.data_file .filereport {
+	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
+	
+	/* @White Shadow (7) pixel ------------- */	
+	.pagination a:hover , .pagination span.current{-moz-box-shadow:0 0 7px #fff;-webkit-box-shadow:0 0 7px #fff;box-shadow:0 0 7px #fff;}
+	#content{-moz-box-shadow:0 0 15px #fff;-webkit-box-shadow:0 0 15px #fff;box-shadow:0 0 15px #fff;}
+
+	/* @Gray Shadow --------------- */	
+	.onlineall,	.onlinevisitor,	.onlineusers, .name_users, .guide_user_th, .guide_visitor_th, .user_box,.forget_pass,
+	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .xthumbs,	#boxfileuser .us3r_n4me,	.data_file_down .download  a,	#footer .admin_cp_link span {
+	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
+	
+/* @end */	
+
+/*	---------------------------------------
+	#Rounded Corners
+	--------------------------------------- */
+	/* @Border Corners only, Bottom Left and Right --------------- */
+	#profile .boxdata .tit{-moz-border-radius-topleft : 5px;-moz-border-radius-topright : 5px;-webkit-border-top-left-radius : 5px;-webkit-border-top-right-radius : 5px; border-top-right-radius : 5px;border-top-left-radius : 5px;}
+	
+	/* @Borders all Corners (5)Pixel ----------- */	
+	.pagination a, .pagination span.current, .pagination span.three_dots, .forget_pass, .name_users, .data_file_down .download  a,
+	#footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover,	.onlineall,	.onlinevisitor,	.onlineusers,
+	#profile .boxdata, #boxfileuser .box_user, #boxfileuser .us3r_n4me {
+	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
+
+	/* @Borders all Corners (10)Pixel ----------- */	
+	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
+	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
+	
+   /* @Borders tabs (5)Pixel ----------- */	
+   .tabnav li{-webkit-border-top-right-radius: 5px;-webkit-border-top-left-radius: 5px;-moz-border-radius-topright: 5px;-moz-border-radius-topeft: 5px;border-top-right-radius: 5px;border-top-left-radius: 5px;}
+
+/* @end */

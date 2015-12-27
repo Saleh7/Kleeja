@@ -1,0 +1,141 @@
+<IF NAME="current_smt == general">
+<IF NAME="there_is_cached">
+<div class="note-info">
+	<strong>{lang.CACHED_STYLES}!</strong>
+		{there_is_cached}
+</div>
+<div class="br"></div>
+</IF>
+<div class="tit_con">
+	<h1>{lang.R_PLUGINS}</h1>
+	<div class="second-action tit_plugins_icon" onclick="javascript:get_kleeja_link('./?cp=j_plugins&amp;smt=newplg', '#content'); return false;">{lang.ADD_NEW_PLUGIN}</div>
+</div>
+<!-- the big box begin -->
+<div class="big-box <IF NAME="no_plugins">no-plugins-bg</IF>">
+<IF NAME="no_plugins">
+<div class="">{lang.NO_PLUGINS}</div>
+<ELSE>
+<div id="plugin_boxes">
+<table style="width:100%">
+<tr>
+<LOOP NAME="arr">
+<td>
+<div class="plugin_box" onclick="javascript:jQuery.facybox({div:'#plugin-{{plg_id}}'});" 
+	onmouseover="javascript:$('.plugin_info_show-{{plg_id}}').show();$('.plugin_else-{{plg_id}}').hide();" 
+	onmouseout="javascript:$('.plugin_info_show-{{plg_id}}').hide();$('.plugin_else-{{plg_id}}').show();"
+	style="float:<IF LOOP="i">left<ELSE>right</IF>">
+	<div class="plugin_info_show plugin_info_show-{{plg_id}}"><div class="f_text">{lang.VIEW}</div></div>
+	<div class="plugin_else plugin_else-{{plg_id}}">
+		<div class="plugin_img"><img src="{{plg_icon_url}}" /></div>
+		<div class="plugin_title">{{plg_name}} {{plg_ver}}</div>
+		<div class="plugin_by">{{plg_author}}</div>
+	</div>
+
+<div id="plugin-{{plg_id}}" style="display:none;">
+<div class="plugin_information">
+	<div class="plugin_info_title">{{plg_name}} {{plg_ver}}</div>
+	<div class="plugin_info_desc">{{plg_dsc}}</div>
+	<div class="plugin_info_settings">
+		<IF LOOP="plg_disabled">
+		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/enable.png" alt="{lang.ENABLE}" /> {lang.ENABLE}</a>
+		<ELSE>
+		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /> {lang.DISABLE}</a>
+		</IF>
+		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href, '#content', {confirm:true}); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /> {lang.DELETE}</a>
+		<IF LOOP="plg_instructions">
+		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /> {lang.INFORMATION}</a>
+		</IF>
+	</div>
+</div>
+</div>
+</div>
+</td>
+<IF LOOP="i"></tr><tr></IF>
+</LOOP>
+</tr>
+</table>
+<div class="clear"></div>
+</div>
+<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
+
+</IF>
+
+</div>
+<!-- the big box end -->
+
+
+
+
+<!-- note for user  -->
+<!-- cached changed -->
+<IF NAME="is_there_changes_files">
+<div class="hr"></div>
+
+<!-- the big box begin#changes_files -->
+<div class="big-box changes_files">
+<h1>{lang.PLUGINS_CHANGES_FILES} </h1>
+<h2>{lang.PLUGINS_CHANGES_FILES_EXP}</h2>
+
+<div class="br"></div>
+<table style="width:100%">
+	<LOOP NAME="changes_files">	
+	<tr>
+			<td>{{file}}</td>
+			<td class="downloadchf"><a href="{{path}}">{lang.DOWNLAOD}</a></td>
+	</tr>
+	</LOOP>
+</table>
+
+<p class="submit">
+	<button type="submit" class="btn" onclick="javascript:get_kleeja_link('{action}&amp;cc=1'); return false;"><span>{lang.DELETE}</span></button>
+</p>
+
+<div class="br"></div>
+<div class="br"></div>
+<div class="clear"></div>
+
+</div>
+<!-- the big box end#changes_files -->
+</IF>
+
+
+<ELSEIF NAME="current_smt == newplg">
+<!-- add new plugin -->
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_PLUGINS}</a> &raquo; {lang.ADD_NEW_PLUGIN}</h1>   
+</div>
+
+<div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
+<div class="hr"></div>
+
+<form method="post" action="{action}" enctype="multipart/form-data" id="add_plugin_form">
+
+<h2>{lang.ADD_NEW_PLUGIN_EXP}</h2>
+<div class="section">
+	<h3><label for="imp_file"></label></h3>
+	<div class="box">
+		<input name="imp_file" id="imp_file" type="file" />
+	</div>
+</div>
+<div class="clear"></div>
+
+
+<div class="br"></div>
+<div class="hr"></div>
+<INCLUDE NAME="admin_plugin_mfile"> 
+
+
+<div class="br"></div>
+
+<p class="submit">
+	<input type="hidden" name="submit_new_plg" value="1" />
+	<button type="submit" name="submit_new_plg" class="btn"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS}
+</form>
+</div>
+<!-- the big box end -->
+</IF>

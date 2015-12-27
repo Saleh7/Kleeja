@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*	---	Explore all versions browser ----------- */
+html {background: #EBEBEB url(../images/bg_footer.gif) repeat;}
+input[type="submit"]{cursor: pointer;}
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #D26900;}
+input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
+.safe_code ,.call,.register,.get_password{width:94%;}
+.data_menu td{border:2px solid #F6EBE4;}
+#wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
+#content, #content_index  {width:70%;margin:5px 15px 0 15px;}
+.IEs_c {width:97%;}
+#filecplink  input.link_user {margin-top:10px;}
+#filecplink legend.copylink {padding:5px;}
+#footer .bu-panel{line-height:28px;}
+.data_file .tit {padding:5px 0;margin:1px 1px;}
+.data_file .data_menu  {width:100%;font-size:12px;table-layout:fixed;}
+.data_file .data_menu tr{margin-bottom:0px;}
+.data_file .filereport {margin:5px 1px 0 1px;}

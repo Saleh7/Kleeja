@@ -1,0 +1,87 @@
+﻿<script type="text/javascript">
+	<!--
+	function show_msg (te, id)
+	{
+		var te = document.getElementById(te).value;
+		var iee = '<div class="report-show">' + te + '';
+		iee += "<div class='clr'></div><br /><form method='post' action='{action}' id='send_form'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+		iee += "<div class='clr'></div><input type='hidden' name='reply_submit' value='1'/>";
+		iee += "<button type='submit' name='reply_submit' class='btn' onclick='javascript:submit_kleeja_data(\"#send_form\", \"#content\", 0); return false;'><span>{lang.REPLY}</span></button><div class=\"clear\"></div></form></div>";
+		document.getElementById('mail_here').innerHTML = iee;
+	}
+	-->
+</script>
+
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+<h1>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
+</div>
+
+<!-- mail here  -->
+<IF NAME="no_results"><ELSE>
+	<div id="mail_here">{lang.E_CLICK}</div>
+</IF>
+
+<form method="post" name="reportform" action="{action}" id="reports_form">
+
+<IF NAME="no_results">
+<h2>{lang.MESSAGE_NONE}</h2>
+<ELSE>
+
+<div class="br"></div>
+
+<!-- start data table -->
+<table>
+	<tr class="first">
+		<td style="width:20px;"><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');" title="{lang.DELETE}">#</a></td>
+		<td>{lang.NAME}</td>
+		<td>{lang.IP}</td>
+		<td>{lang.URL}</td>
+		<td>{lang.TIME}</td>
+		<!-- admin reports info td1 extra -->
+	</tr>
+
+<LOOP NAME="arr">
+	<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
+	<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+		<td>
+			<a title="{lang.VIEW}" onclick="javascript:show_msg('textva_{{id}}',{{id}});" href="javascript:void(0);">{{name}}</a>
+			<input type="hidden" value="&lt;div class='email-for-msg'&gt;{{name}}  ({{mail}}) :&lt;/div&gt;&lt;div class='text-for-msg'&gt;{{text}}&lt;/div&gt;" id="textva_{{id}}">
+
+	<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>		</td>
+		<td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
+		<td title="{{time}}">{{human_time}}</td>
+		<!-- admin reports info td2 extra -->
+	</tr>
+</LOOP>
+
+</table>
+<!-- end data table -->
+
+<div class="br"></div>
+<div class="left check_all check_all_table">[ <a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</div>
+<div class="br"></div>
+
+<!-- pagination -->
+{page_nums}
+<div class="clear"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#reports_form', '#content', 0); return false;"><span>{lang.DEL_SELECTED}</span></button>
+</p>
+		
+
+
+{H_FORM_KEYS}
+</form>
+</IF>
+</div>
+<!-- the big box end -->
+
+<IF NAME="there_queue">
+<div class="br"></div>
+<div class="note-info">{lang.DELETE_PROCESS_IN_WORK}</div>
+</IF>

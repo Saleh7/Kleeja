@@ -1,0 +1,98 @@
+/**
+* LEFT-To-RIGHT CSS file
+*/
+
+
+/* global.css */
+body{
+	text-align:left;
+	direction:ltr;
+}
+
+#pagination { text-align:right;  float:right; }
+
+#sign_ajax,#sign_ajax_error{
+	left:40%;
+}
+.btn{
+	float:right;
+}
+
+/* byname.css 
+*/
+#menu, #menu_left{float:left;}
+#menu .link_current {
+    border-left: 2px dotted #DA7C0C;
+    border-right: none;
+}
+
+#content{
+     float: right;
+}
+	#content .section h3{
+		float:left;
+	}
+	#content .section .box{
+		text-align:left;
+		float:left;
+	}
+
+#top-header {
+	text-align:right;
+ }
+
+
+.group_line .r1 {
+    float: left;
+}
+.group_line .r2 {
+    float: right;
+}
+
+#content .tit_con .tit_groups_icon {
+    background: url("../images/group_add.png") no-repeat 100% 1%;
+    padding-right: 24px;
+}
+#content .second-action {
+    float: right;
+    text-align: right;
+}
+#menu_left ul li {
+    margin-left: 20px;
+}
+#content .section .box {
+    float: right;
+}
+.team-info .section {
+    background-position: 100% 90% !important;
+}
+form .submit {
+    float: right;
+    margin-right: -3px;
+}
+.check_all_table {
+    background: url("../images/arrow_ltr.png") no-repeat  0 0 !important;
+    padding-left: 35px;
+}
+.delf_caution {
+    font-size: 9px;
+}
+#content .tit_con .tit_plugins_icon {
+    background: url("../images/small_add.png") no-repeat 100% 0;
+    padding-right: 24px;
+}
+.plugin_box {
+    margin-right: 20px;
+}
+#content .tit_con .tit_ext_icon {
+    background: url("../images/ext_add.png") no-repeat 100% 0;
+    padding-right: 24px;
+}
+.groups_edit .section .box img {
+    float: right;
+    margin-left: 20px;
+}
+.quick_edit_tpls td {
+	text-align:left;
+}
+

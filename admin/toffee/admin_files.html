@@ -1,0 +1,123 @@
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function($){
+ //Navigate to pages by arrows
+ $(document).keydown(function(e) {
+
+	if (!$('#pagination').length) {
+		return;
+	}
+
+	var current_page = parseInt($('#pagination .current span').html());
+	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+	var current_location = '{action}'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+
+	switch(e.keyCode) { 
+		//left, next
+		case 37:
+			if(!is_there_next){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page+1), '#content');
+		break;
+		//right, prev
+		case 39:
+			if(current_page <= 1){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page-1), '#content');
+		break;
+	}
+});
+
+});
+//-->
+</script>
+
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.R_FILES}  [{current_page}/{total_pages}]</h1>
+</div>
+ 
+<IF NAME="is_search">
+<h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  <IF NAME="nums_rows"> | <a href="{deletelink}"  onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;">{lang.DELETEALLRES}</a></IF></h2>
+<ELSE></IF>
+
+<div class="br"></div>
+
+<form method="post" name="filesform" action="{action}" id="files_form">
+	
+<IF NAME="no_results">
+	<div class="note-info">
+	<h2>{lang.NO_RESULT_USE_SYNC}</h2>
+	</div>
+<ELSE>
+	
+
+<!-- start data table -->
+<table>
+	<tr class="first">
+		<td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');" title="{lang.DELETE}">#</a></td>
+		<td style="width:20px;"></td>
+		<td style="white-space:nowrap;">
+			<a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename"  onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILENAME}</a>
+			<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.gif" alt="&uarr;"  onclick="javascript:get_kleeja_link(this.href, '#content'); return false;" /></a>
+			<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.gif" alt="&darr;" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;" /></a>
+		</td>
+		<td><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.SIZE}</a></td>
+		<td><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILEUPS}</a></td>
+		<td><a href="{ord_action}&amp;order_by=folder" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILDER}</a></td>
+		<td><a href="{ord_action}&amp;order_by=user" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.BY}</a></td>
+		<td><a href="{ord_action}&amp;order_by=user_ip" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.IP}</a></td>
+		<td><a href="{ord_action}&amp;order_by=report" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.NUMPER_REPORT}</a></td>
+			<td><a href="{ord_action}&amp;order_by=type" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILETYPE}</a></td>
+		<td><a href="{ord_action}&amp;order_by=time" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILEDATE}</a></td>
+		<!-- admin files data td1 extra -->
+	</tr>
+
+	<LOOP NAME="arr">
+	<tr id="su[{{id}}]" class="osilver">
+		<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
+		<td style="width:20px;"><img src="{{typeicon}}" alt="{{type}}" title="{{type}}" /></td>
+		<td>{{name}}</td>
+		<td>{{size}}</td>
+		<td><IF LOOP="direct"><img src="{STYLE_PATH_ADMIN}images/directurl.png" title="{lang.DIRECT_FILE_NOTE}" alt="{lang.DIRECT_FILE_NOTE}" /><ELSE>{{ups}}</IF></td>
+		<td>{{folder}}</td>
+		<td>{{user}}</td>
+		<td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/find_file_ip.png" alt="find files" /></a></td>
+		<td>{{report}}</td>
+		<td>{{type}}</td>
+		<td title="{{time}}">{{time_human}}</td>
+		<!-- admin files data td2 extra -->
+	</tr>
+	</LOOP>
+
+	<!-- JUST FOR DECORATION, LIFE NEED SOME FUN SOMETIME -->
+	<tr style="background-color:#D2D2D2;height:4px;"><td colspan="11"></td></tr>
+	
+</table>
+<!-- end data table -->
+
+<div class="br"></div>
+
+<div class="left check_all check_all_table">[ <a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</div>
+	
+<div class="br"></div>
+	
+<!-- pagination -->
+{page_nums}
+<div class="clear"></div>
+	
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#files_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+</p>
+		
+</IF>
+
+{H_FORM_KEYS}
+</form>
+</div>
+<!-- the big box end -->

@@ -1,0 +1,424 @@
+<!-- general -->
+
+<IF NAME="current_smt == general">
+
+<!-- start general -->
+
+<LOOP NAME="ADM_NOTIFICATIONS">
+<div class="note-{{msg_type}}">
+	<strong>{{title}}!</strong>
+		{{msg}}
+</div>
+</LOOP>
+
+
+<!-- the big box begin general -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{usernamelang}</h1>   
+</div>
+
+<IF NAME="last_visit">
+<div class="section">
+	<h3>{lang.LAST_VISIT}</h3>
+	<div class="box">{last_visit}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.IMG_LST_VST_SEARCH}</h3>
+	<div class="box">
+		<IF NAME="image_last_visit"><a href="{h_lst_imgs}{image_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
+		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
+			<option>{lang.TIME}...</option>
+			<option value="3600">{lang.HOUR}</option>
+			<option value="18000">{lang.5HOURS}</option>
+			<option value="864000">{lang.DAY}</option>
+			<option value="6048000">{lang.WEEK}</option>
+			<option value="25920000">{lang.MONTH}</option>
+			<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.FLS_LST_VST_SEARCH}</h3>
+	<div class="box">
+		<IF NAME="files_last_visit"><a href="{h_lst_files}{files_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
+		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
+			<option>{lang.TIME}...</option>
+			<option value="3600">{lang.HOUR}</option>
+			<option value="18000">{lang.5HOURS}</option>
+			<option value="864000">{lang.DAY}</option>
+			<option value="6048000">{lang.WEEK}</option>
+			<option value="25920000">{lang.MONTH}</option>
+			<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+</IF>
+
+<!-- admin start general section -->
+
+</div>
+<!-- the big box end general -->
+
+
+<!-- the big box begin general1 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.HURRY_HURRY}</h1>   
+</div>
+
+
+<div class="section">
+	<h3>{lang.STYLE}</h3>
+	<div class="box">
+		<select name="style_change" id="style_change">
+			{hurry_styles_list}
+		</select>
+		<button class="btn" onclick="javascript:get_kleeja_link('{hurry_style_link}' + $('#style_change').val()); return false;"><span>{lang.CHANGE}</span></button>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.LANGUAGE}</h3>
+	<div class="box">
+		<select	 name="lang_change" id="lang_change">
+			{hurry_langs_list}
+		</select> 
+		&nbsp; {lang.FOR} &nbsp;  
+		<select	 name="groups_list" id="groups_list">
+			{hurry_groups_list}
+		</select>
+		<button class="btn" onclick="javascript:get_kleeja_link('{hurry_lang_link}' + $('#lang_change').val() + '&qg=' + $('#groups_list').val()); return false;"><span>{lang.CHANGE}</span></button>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="hr"></div>
+
+<div class="section">
+	<h3>{lang.R_REPAIR}</h3>
+	<div class="box">
+		<button class="btn" onclick="javascript:get_kleeja_link('{del_cache_link}'); return false;"><span>{lang.DEL_CACHE}</span></button>
+	</div>
+</div>
+<div class="clear"></div>
+
+<!-- admin start general section1 -->
+
+</div>
+<!-- the big box end general1 -->
+
+<!-- the big box begin general2 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.GENERAL_STAT}</h1>   
+</div>
+
+
+<div class="section">
+	<h3>{lang.AUSERS_NUM}</h3>
+	<div class="box">{users_number}</div>
+</div>
+<div class="clear"></div>
+
+
+<IF NAME="config.user_system==1">
+<div class="section">
+	<h3>{lang.LAST_REG}</h3>
+	<div class="box">{lst_reg}</div>
+</div>
+<div class="clear"></div>
+</IF>
+
+<div class="section">
+	<h3>{lang.AFILES_NUM}</h3>
+	<div class="box">{files_number} {lang.FILE}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.LSTDELST}</h3>
+	<div class="box">{last_del_fles}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.AFILES_SIZE_SPACE}</h3>
+	<div class="box">
+		<div style="font-size:10px;"><div style="width:200px;height:7px;background-color:#ddd;"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%;height:7px;background-color:#000;" /></div> {per1}/100%</div>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.KLEEJA_VERSION}</h3>
+	<div class="box">{kleeja_version}</div>
+</div>
+<div class="clear"></div>
+
+<!-- admin start general section2 -->
+
+</div>
+<!-- the big box end general2 -->
+
+<IF NAME="stats_chart">
+<!-- the big box begin general3 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.STATS}</h1>   
+</div>
+
+<div id="chart_stats"></div>
+
+<!-- admin start general section3 -->
+<script type="text/javascript">
+{stats_chart}
+
+$('#chart_stats').jqBarGraph({
+	data: arrayOfDataMulti,
+		colors: ['#2D6BA9','#91C7E5'] ,
+   legends: ['{lang.FILE}','{lang.IMAGE}'],
+   legend: true,
+   height: 200,
+   barSpace: 5,
+   width:700
+   
+});
+</script>
+</div>
+<!-- the big box end general3 -->
+</IF>
+
+
+<ELSEIF NAME="current_smt == other">
+ <!-- the big box begin other -->
+<div class="big-box"> 
+<div class="tit_con">
+	<h1>{lang.OTHER_INFO}</h1>
+</div>
+
+<div class="section">
+	<h3>{lang.PHP_VER}</h3>
+	<div class="box">{php_version} <img src="{STYLE_PATH_ADMIN}images/go_to.png" /></div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.MYSQL_VER}</h3>
+	<div class="box">{mysql_version}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.OTHER_INFO}</h3>
+	<div class="box">
+		max_execution_time: {max_execution_time} <br />
+		upload_max_filesize: {upload_max_filesize} <br />
+		post_max_size: {post_max_size} <br />
+		memory_limit: {memory_limit} <br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<!-- admin start general other -->
+
+</div>
+<!-- the big box end other -->
+
+<!-- the big box begin other2 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.SEARCH_STAT}</h1>   
+</div>
+
+
+<div class="section">
+	<h3>Google</h3>
+	<div class="box">
+		{lang.LAST_GOOGLE} : {s_last_google}<br />
+		{lang.GOOGLE_NUM} : {s_google_num} <br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>Bing</h3>
+	<div class="box">
+		{lang.LAST_BING} :	{s_last_bing}<br />
+		{lang.BING_NUM} : {s_bing_num}<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<!-- admin start other section2 -->
+
+</div>
+<!-- the big box end other2 -->
+
+
+<IF NAME="sql_debug">
+<!-- the big box begin debug -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>SQL DEBUGS</h1>   
+</div>
+
+<div class="dir left" style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted;width:100%">
+	<table>
+<LOOP NAME="sql_debug">
+	<tr style="color:{{colored}}">
+	<td style="width:20%">{{type}}</td>
+	<td style="width:20%">{{time}}</td>
+	<td>{{content}}</td>
+	</tr>
+</LOOP>
+	</table>
+</div>
+</div>
+<!-- the big box end debug-->
+</IF>
+
+
+
+<ELSEIF NAME="current_smt == team">
+<!-- the big box begin team-->
+<div class="big-box team-info">
+<div class="tit_con">
+	<h1>{lang.KLEEJA_TEAM}</h1>
+</div>
+
+<div class="section" style="background:url({STYLE_PATH_ADMIN}images/sa.png)";>
+	<h3 style="background:url({STYLE_PATH_ADMIN}images/failerror.jpg);">
+	</h3>
+	<div class="box" style="direction:ltr">
+		Abdullrahman M. Al-Shawaiee<br />
+		<span style="font-size:12px; color:#666">
+		عبدالرحمن الشويعي<br />
+		</span>
+		<br/>
+		<span style="font-size:11px; color:#666">
+		AKA 'Saanina'<br />
+		<a href="http://twitter.com/abdu1m" target="_tab">@abdu1m</a><br/>
+		2007-2012<br />
+		</span>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section" style="background:url({STYLE_PATH_ADMIN}images/kw.png)";>
+	<h3 style="background:url({STYLE_PATH_ADMIN}images/failerror.jpg);"></h3>
+	<div class="box" style="direction:ltr">
+		Bader N. Al-Mutairi <br />
+		<span style="font-size:12px; color:#666">
+			بدر المطيري <br/>
+		</span>
+		<br/>
+		<span style="font-size:11px; color:#666">
+		AKA 'phpfalcon'<br/>
+		<a href="http://twitter.com/bdreo" target="_tab">@bdreo</a><br/>
+		2009-2012<br />
+		</span>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section" style="background:url({STYLE_PATH_ADMIN}images/sy.png)";>
+	<h3 style="background:url({STYLE_PATH_ADMIN}images/failerror.jpg);"></h3>
+	<div class="box" style="direction:ltr">
+		Moayead Y. Hejazi <br />
+		<span style="font-size:12px; color:#666">
+			مؤيد حجازي<br/>
+		</span>
+		<br/>
+		<span style="font-size:11px; color:#666">
+		<a href="http://twitter.com/myyyd" target="_tab">@myyyd</a><br/>
+		2011-2012<br />
+		</span>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section" style="background:url({STYLE_PATH_ADMIN}images/sa.png)";>
+	<h3 style="background:url({STYLE_PATH_ADMIN}images/failerror.jpg);"></h3>
+	<div class="box" style="direction:ltr">
+		Mansour A. Kareem AlDouweghri<br />
+		<span style="font-size:12px; color:#666">
+			منصور الدويغري<br/>
+		</span>
+		<br/>
+		<span style="font-size:11px; color:#666">
+		AKA '­Gareeboo'<br/>
+		<a href="http://twitter.com/iMn9or" target="_tab">@iMn9or</a><br/>
+		2007-2011<br />
+		</span>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section" style="background:url({STYLE_PATH_ADMIN}images/sa.png)";>
+	<h3 style="background:url({STYLE_PATH_ADMIN}images/failerror.jpg);"></h3>
+	<div class="box" style="direction:ltr">
+		Abdulrahman E. Al-Harthy <br />
+		<span style="font-size:12px; color:#666">
+			عبدالرحمن الحارثي<br/>
+		</span>
+		<br/>
+		<span style="font-size:11px; color:#666">
+		AKA 'Tar3q'<br />
+		2009-2011<br />
+		</span>
+	</div>
+</div>
+<div class="clear"></div>
+</div>
+<!-- the big box end team -->
+
+<IF NAME="translator_copyrights">
+<!-- the big box begin trns -->
+<div class="big-box">
+	<h1>{translator_copyrights}</h1>
+</div>
+<!-- the big box end trns -->
+</IF>
+
+<ELSEIF NAME="current_smt == firstime">
+<!-- the big box begin frst -->
+<div class="big-box">
+<h1>{lang.FIRST_TIME_CP}</h1>
+
+<span class="firstime-text">{lang.FIRST_TIME_CP_EX}</span>
+
+
+
+<div class="br"></div>
+<img src="{STYLE_PATH_ADMIN}images/buraidah_ex.png" />
+<div class="br"></div>
+
+<ol class="firstime-list">
+	<li>{lang.FIRST_TIME_HOW1}</li>
+	<li>{lang.FIRST_TIME_HOW2}</li>
+	<li>{lang.FIRST_TIME_HOW3}</li>
+	<li>{lang.FIRST_TIME_HOW4}</li>
+	<li>{lang.FIRST_TIME_HOW5}</li>
+	<li>{lang.FIRST_TIME_HOW6}</li>
+	<li>{lang.FIRST_TIME_HOW7}</li>
+</ol>
+
+<div class="br"></div>
+
+<button class="firstime-button" onclick="get_kleeja_link('./');$('#menu').css('display', '');">{lang.FIRST_TIME_DONE}</button>
+</div>
+<!-- the big box end frst-->
+
+
+<script type="text/javascript">
+$('#menu').css('display', 'none');
+</script>
+
+<!-- admin start another elseif -->
+
+</IF>
+
+<!-- admin start endoffile -->

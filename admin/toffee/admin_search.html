@@ -1,0 +1,168 @@
+<script type="text/javascript">
+function check_search_files_form(form)
+{
+	var do_it = false;
+	if(form.filename.value != '')
+		do_it = true;
+	else if(form.username.value != '')
+		do_it = true;
+	else if(form.ext.value != '')
+		do_it = true;
+	else if(form.size.value != '')
+		do_it = true;
+	else if(form.ups.value != '')
+		do_it = true;
+	else if(form.rep.value != '')
+		do_it = true;
+	else if(form.lastdown.value != '')
+		do_it = true;
+	else if(form.user_ip.value != '')
+		do_it = true;
+
+	if(!do_it)
+	{
+		 alert('{lang.NO_SEARCH_WORD}');
+		 return false;
+	}
+}
+function check_search_users_form(form)
+{
+	var do_it = false;
+	if(form.username.value != '')
+		do_it = true;
+	else if(form.username.value != '')
+		do_it = true;
+
+	if(!do_it)
+	{
+		 alert('{lang.NO_SEARCH_WORD}');
+		 return false;
+	}
+}
+</script>
+
+<IF NAME="current_smt==files">
+<!-- the big box begin -->
+<div class="big-box search_container">
+<div class="tit_con">
+	<h1>{lang.R_SEARCH}</h1>   
+</div>
+
+
+<form method="post" action="{action}" onsubmit="return check_search_files_form(this);" id="adv_search">
+
+<div class="section">
+	<h3><label for="filename">{lang.FILENAME}</label></h3>
+	<div class="box"><input type="text" name="filename" id="filename" value="" size="40" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="username">{lang.USERNAME}</label></h3>
+	<div class="box"><input type="text" name="username" id="username" value="{filled_username}" size="40" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="ext">{lang.FILETYPE}</label></h3>
+	<div class="box"><input type="text" name="ext" id="ext" value="" size="20" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="size">{lang.FILESIZE}</label></h3>
+	<div class="box">
+		<select name="than">
+			<option value="1">&gt;</option>
+			<option value="2">&lt;</option>
+		</select>
+		<input type="text" id="size" name="size" size="10" /> {lang.KILOBYTE}
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="ups">{lang.FILEUPS}</label></h3>
+	<div class="box">
+		<select name="uthan">
+			<option value="1">&gt;</option>
+			<option value="2">&lt;</option>
+		</select>
+		<input type="text" id="ups" name="ups" size="10" />
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="rep">{lang.REPORT}</label></h3>
+	<div class="box">
+		<select name="rthan">
+			<option value="1">&gt;</option>
+			<option value="2">&lt;</option>
+		</select>
+		<input type="text" id="rep" name="rep" size="10" />
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lastdown">{lang.LAST_DOWN}</label></h3>
+	<div class="box">{lang.WAS_B4} <input type="text" name="lastdown" id="lastdown" value="" size="10" /> {lang.DAYS}</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="user_ip">{lang.IP}</label></h3>
+	<div class="box"><input type="text" name="user_ip" id="user_ip" value="{filled_ip}" size="20" /></div>
+</div>
+<div class="clear"></div>
+
+<!-- admin search data input extra -->
+
+<div class="br"></div>
+	
+<!-- button adv -->
+<p class="submit">
+	<input type="hidden" name="search_file" value="1" />
+	<button type="submit" id="submit" name="search_file" class="btn" onclick="javascript:submit_kleeja_data('#adv_search', '#content', 0); return false;"><span>{lang.SEARCH_SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS}
+</form>
+</div>
+<!-- the big box end -->
+
+<ELSEIF NAME="current_smt==users">
+
+<!-- start users search  -->
+<IF NAME="default_user_system">
+<!-- the big box begin -->
+<div class="big-box search_container">
+<div class="tit_con">
+	<h1>{lang.SEARCH_USERS}</h1>
+</div>
+
+
+<form method="post" action="{action}" onsubmit="return check_search_users_form(this);" id="user_search">
+
+<div class="section">
+	<h3><label for="username">{lang.USERNAME}</label></h3>
+	<div class="box"><input type="text" name="username" id="username" value=""size="40" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="usermail">{lang.EMAIL}</label></h3>
+	<div class="box"><input type="text" name="usermail" id="usermail" value=""size="40" /></div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button user -->
+<p class="submit">
+	<input type="hidden" name="search_user" value="1" />
+	<button type="submit" id="submit" name="search_user" class="btn" onclick="javascript:submit_kleeja_data('#user_search', '#content', 0); return false;"><span>{lang.SEARCH_SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS2}
+</form>
+</div>
+<!-- the big box end -->
+</IF>
+
+</IF>
+
+

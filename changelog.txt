@@ -1,0 +1,59 @@
+ 
+!! warrning !! dont open this file with WINDOWS notepad !!
+
+ 
+
+[ ] not yet
+[-] will be ignored, or to be done at next release
+[x] done
+
+1.6 - version:
+[x] Fix XSS bug at uploading files [ thanks to Ebram Atef @geekpero ]; bug#1253
+[+] Add useful https header to improve security.
+[x] fix compatibility issue with php 5.5; bug#1252, bug#1240, bug#1239, bug#1241
+[x] fix an error with thumbs.php if no GD installed
+[x] fix bug where admin can not change the ACL [permissions] of users. bug##1229
+[x] fix bug where user can’t see his folder if ACL to see other’s folders is off to him. bug#1228.
+[x] remove gzip feature because user who doesn’t know how to use it keep using it. bug#1226
+[x] no more mysql driver, all now transformed to mysqli. bug #1224
+[x] fix bug if number of files that user can upload is 0, he can still upload! bug#1223.
+[x] remove backup feature, no need for it.
+
+
+
+1.5.4 - version:
+[x] When the database old, tell the user to update.
+[x] fix bug in ACP where secondary menu not appear
+[x] add link to user folder at do.php?id=.. page
+ 
+
+1.5.3 - version : 
+[x] add turkish language.
+[x] disable ajax by default at ACP ( you can add AJAX_ACP in config.php to turn ajax on )
+[x] some style improvments at ACP 
+[x] hide un-important items from ACP menu and add a button to show them.
+[x] fix problems with login + captcha that's appeared at 1.5.2
+
+
+1.5.2 - version : 
+[x] Add Persian language (thanx for dverbame)
+[x] Fix bug with thumbs size (reported by : Tony Broomfield)
+[x] fix bug where Last visit in ACP doesnt use Kleeja zone (reborted by: Bader_vip)
+[x] fix bug where total files number excludes images (reborted by: Bader_vip)
+[x] fix bug where guests can not access user folders, ucp.php?go=fileuser&id=[userid] (reported by: ibragate)
+[x] fix bug where kleeja doesnt respect decoding type when it set to nothing (reported by: althani)
+[x] fix security issue .. 
+[x] Username at registering now should be between 4 to 25 characters (reported by ibragate)
+[x] fix bug where user can not open other page while uploading files (reported by gulfup.com)
+[x] faster home page with new improved javascript tabs
+[x] Juqery.js library is included offically with Kleeja now
+[x] fix bug when there is no file and request thumbf=..., it shows txt error instead of image error.
+[x] good look of images at userfile while loading instead of just white spaces. 
+[x] return back to "mysql_real_escape_string, (reported by twitter/Abdullah_says)
+
+1.5.1 - version : 
+[x] Fix bug with uploading from URL.
+[x] Fix bug in SQL when reparing tables.
+[x] FIx bug where function is miswritten [helper_thumb_imagick]
+[x] Fix unclear halt at install.php file 
+
